@@ -5,6 +5,7 @@ We kindly request that you import fastchat instead of copying this file if you w
 You can contribute back the changes you want to make.
 """
 
+import json
 import dataclasses
 from enum import auto, IntEnum
 from typing import List, Any, Dict
@@ -272,6 +273,20 @@ def register_conv_template(template: Conversation, override: bool = False):
 def get_conv_template(name: str) -> Conversation:
     """Get a conversation template."""
     return conv_templates[name].copy()
+
+def get_conv_template_from_json_file(template_filepath: str) -> Conversation:
+    with open(template_filepath, "r") as file:
+        config = json.load(file)
+
+    # Convert sep_style from string to SeparatorStyle enum
+    if "sep_style" in config:
+        config["sep_style"] = SeparatorStyle[config["sep_style"]]
+
+    # Start a conversation 
+    if "messages" not in config:
+        config["messages"] = []
+
+    return Conversation(**config)
 
 
 # A template with a one-shot conversation example

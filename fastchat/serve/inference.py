@@ -1,4 +1,5 @@
 """Inference for FastChat models."""
+import os
 import abc
 import gc
 import math
@@ -27,7 +28,11 @@ from transformers.generation.logits_process import (
     TopPLogitsWarper,
 )
 
-from fastchat.conversation import get_conv_template, SeparatorStyle
+from fastchat.conversation import (
+    get_conv_template, 
+    get_conv_template_from_json_file,
+    SeparatorStyle
+)
 from fastchat.model.model_adapter import (
     load_model,
     get_conversation_template,
@@ -317,7 +322,11 @@ def chat_loop(
     # Chat
     def new_chat():
         if conv_template:
-            conv = get_conv_template(conv_template)
+            # check to see if the conv_template is a valid file path
+            if os.path.isfile(conv_template):
+                conv = get_conv_template_from_json_file(conv_template)
+            else:
+                conv = get_conv_template(conv_template)
         else:
             conv = get_conversation_template(model_path)
         return conv
