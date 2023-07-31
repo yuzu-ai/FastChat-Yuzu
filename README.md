@@ -101,6 +101,11 @@ See the ["Not Enough Memory" section](#not-enough-memory) below if you do not ha
 python3 -m fastchat.serve.cli --model-path lmsys/vicuna-7b-v1.3
 ```
 
+Running llama 2 chat model
+```
+python3 -m fastchat.serve.cli --model-path meta-llama/Llama-2-7b-chat-hf
+```
+
 #### Multiple GPUs
 You can use model parallelism to aggregate GPU memory from multiple GPUs on the same machine.
 ```
@@ -182,6 +187,11 @@ You will see a short output.
 #### Launch the Gradio web server
 ```bash
 python3 -m fastchat.serve.gradio_web_server
+```
+
+If you want to run it on llama chat model, you can use the following command:
+```bash
+python3 -m fastchat.serve.model_worker --model-path meta-llama/Llama-2-7b-chat-hf
 ```
 
 This is the user interface that users will interact with.
