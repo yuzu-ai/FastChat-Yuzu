@@ -106,6 +106,11 @@ Running llama 2 chat model
 python3 -m fastchat.serve.cli --model-path meta-llama/Llama-2-7b-chat-hf
 ```
 
+Running a local conversation template
+```
+python3 -m fastchat.serve.cli --model-path meta-llama/Llama-2-7b-chat-hf --conv-template path/to/file.json
+```
+
 #### Multiple GPUs
 You can use model parallelism to aggregate GPU memory from multiple GPUs on the same machine.
 ```
