@@ -199,6 +199,12 @@ If you want to run it on llama chat model, you can use the following command:
 python3 -m fastchat.serve.model_worker --model-path meta-llama/Llama-2-7b-chat-hf
 ```
 
+Support Qlora:
+```bash
+python3 -m fastchat.serve.model_worker --model-path meta-llama/Llama-2-7b-chat-hf --q-lora True
+```
+
+
 This is the user interface that users will interact with.
 
 By following these steps, you will be able to serve your models using the web UI. You can open your browser and chat with a model now.
