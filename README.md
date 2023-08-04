@@ -201,7 +201,7 @@ python3 -m fastchat.serve.model_worker --model-path meta-llama/Llama-2-7b-chat-h
 
 Support Qlora:
 ```bash
-python3 -m fastchat.serve.model_worker --model-path meta-llama/Llama-2-7b-chat-hf --q-lora True
+python3 -m fastchat.serve.model_worker --model-path meta-llama/Llama-2-7b-chat-hf --q_lora True
 ```
 
 ref: https://github.com/lm-sys/FastChat/pull/1676
