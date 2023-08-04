@@ -204,6 +204,7 @@ Support Qlora:
 python3 -m fastchat.serve.model_worker --model-path meta-llama/Llama-2-7b-chat-hf --q-lora True
 ```
 
+ref: https://github.com/lm-sys/FastChat/pull/1676
 
 This is the user interface that users will interact with.
 
