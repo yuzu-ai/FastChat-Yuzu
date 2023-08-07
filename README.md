@@ -28,6 +28,11 @@ FastChat is an open platform for training, serving, and evaluating large languag
 - [Citation](#citation)
 
 ## Install
+質問：電子機器で使用される最も主要な電子回路基板の事をなんと言う？選択肢：掲示板、パソコン、マザーボード、ハードディスク、まな板
+
+質問：子どもから大人まで様々な立場の人が日常的に着るものはどれ？選択肢：スーツ、ニュージーランド、勉強、上着、 ワイシャツ
+
+質問：衣服の背中を覆う部分のことは？選択肢：ファスナー、ファンデ、後ろ指、 後ろ足、 後ろ身頃
 
 ### Method 1: With pip
 
@@ -130,7 +135,7 @@ python3 -m fastchat.serve.cli --model-path meta-llama/Llama-2-7b-chat-hf --conv-
 Chatting with a local fine-tuned model
 
 ```
-CUDA_VISIBLE_DEVICES=2 python3 -m fastchat.serve.cli --model-path path/to/model/output/model_name_2023-06-04_22-02/checkpoint-n/
+CUDA_VISIBLE_DEVICES=X python3 -m fastchat.serve.cli --model-path path/to/model/output/model_name_2023-06-04_22-02/checkpoint-n/
 ```
 
 #### Multiple GPUs
@@ -270,6 +275,36 @@ CUDA_VISIBLE_DEVICES=1 python3 -m fastchat.serve.model_worker --model-path lmsys
 ```bash
 python3 -m fastchat.serve.gradio_web_server_multi
 ```
+
+### Running a local model in the web UI
+
+1. Activate the virtual environment.
+
+```bash
+conda activate webchat
+```
+
+2. Launch the controller
+
+```bash
+python3 -m fastchat.serve.controller
+```
+
+
+3. Launch the model worker(s)
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python3 -m fastchat.serve.model_worker --model-path ./Llama-2-7b-chat-hf/
+```
+
+4. Launch the web server
+Make sure you have the correct controller-url
+
+```bash
+python3 -m fastchat.serve.gradio_web_server --controller-url http://localhost:21001
+```
+
+5. Launch the web UI
 
 ## API
 
