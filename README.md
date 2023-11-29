@@ -287,14 +287,17 @@ conda activate webchat
 2. Launch the controller
 
 ```bash
-python3 -m fastchat.serve.controller
+python3 -m fastchat.serve.controller &
 ```
-
 
 3. Launch the model worker(s)
 
+<!-- ```bash
+CUDA_VISIBLE_DEVICES=0 python3 -m fastchat.serve.model_worker --model-path ~/yuzulm/output/llama7b_dolly-guanaco-lima-cot-oasst-aio-sakura-orca_2023-08-05_00-30/checkpoint-10250/merge --model-names yuzulm-en &
+``` -->
+
 ```bash
-CUDA_VISIBLE_DEVICES=0 python3 -m fastchat.serve.model_worker --model-path ./Llama-2-7b-chat-hf/
+CUDA_VISIBLE_DEVICES=0 python3 -m fastchat.serve.model_worker --model-path ~/yuzulm/output/llama7b_dolly-guanaco-lima-cot-oasst-aio-sakura-orca_2023-08-05_00-30/checkpoint-10250/merge --model-names yuzulm-ja &
 ```
 
 4. Launch the web server

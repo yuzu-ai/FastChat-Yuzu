@@ -209,9 +209,11 @@ def load_model(
         kwargs["load_in_8bit"] = load_8bit
     elif load_8bit:
         if num_gpus != 1:
+            #Passaglia edit to support 8bit quantization on multiple GPUs using bitsandbytes
             warnings.warn(
-                "8-bit quantization is not supported for multi-gpu inference."
+                "8-bit quantization will be handled by the model adapter"
             )
+            kwargs["load_in_8bit"] = True
         else:
             return adapter.load_compress_model(
                 model_path=model_path,

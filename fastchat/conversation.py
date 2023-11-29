@@ -9,7 +9,7 @@ import json
 import dataclasses
 from enum import auto, IntEnum
 from typing import List, Any, Dict
-
+import os
 
 class SeparatorStyle(IntEnum):
     """Separator styles."""
@@ -272,7 +272,12 @@ def register_conv_template(template: Conversation, override: bool = False):
 
 def get_conv_template(name: str) -> Conversation:
     """Get a conversation template."""
-    return conv_templates[name].copy()
+    if os.path.exists(name):
+        print('Loading template from file:', name)
+        return get_conv_template_from_json_file(name)
+    else:
+        print('Loading template for name:', name)
+        return conv_templates[name].copy()
 
 def get_conv_template_from_json_file(template_filepath: str) -> Conversation:
     with open(template_filepath, "r") as file:
@@ -870,6 +875,38 @@ register_conv_template(
         "Please ensure that your responses are socially unbiased and positive in nature.\n\n"
         "If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. "
         "If you don't know the answer to a question, please don't share false information.\n<</SYS>>\n\n",
+        roles=("[INST]", "[/INST]"),
+        messages=(),
+        offset=0,
+        sep_style=SeparatorStyle.LLAMA2,
+        sep=" ",
+        sep2=" </s><s>",
+        stop_token_ids=[2],
+    )
+)
+
+# yuzulm-en template
+# reference: https://github.com/facebookresearch/llama/blob/cfc3fc8c1968d390eb830e65c63865e980873a06/llama/generation.py#L212
+register_conv_template(
+    Conversation(
+        name="yuzulm-en",
+        system="<s>[INST] <<SYS>>\nYou are a helpful assistant that answers questions clearly and accurately. lang-en\n<</SYS>>\n\n",
+        roles=("[INST]", "[/INST]"),
+        messages=(),
+        offset=0,
+        sep_style=SeparatorStyle.LLAMA2,
+        sep=" ",
+        sep2=" </s><s>",
+        stop_token_ids=[2],
+    )
+)
+
+# yuzulm-ja template
+# reference: https://github.com/facebookresearch/llama/blob/cfc3fc8c1968d390eb830e65c63865e980873a06/llama/generation.py#L212
+register_conv_template(
+    Conversation(
+        name="yuzulm-ja",
+        system="<s>[INST] <<SYS>>\nYou are a helpful assistant that answers questions clearly and accurately. lang-ja\n<</SYS>>\n\n",
         roles=("[INST]", "[/INST]"),
         messages=(),
         offset=0,

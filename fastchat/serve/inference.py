@@ -322,11 +322,7 @@ def chat_loop(
     # Chat
     def new_chat():
         if conv_template:
-            # check to see if the conv_template is a valid file path
-            if os.path.isfile(conv_template):
-                conv = get_conv_template_from_json_file(conv_template)
-            else:
-                conv = get_conv_template(conv_template)
+            conv = get_conv_template(conv_template)
         else:
             conv = get_conversation_template(model_path)
         return conv
